@@ -1,4 +1,4 @@
-package com.sistemas.gestao;
+package com.sistemas.gestao.service;
 
 import java.util.Optional;
 
