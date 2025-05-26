@@ -1,6 +1,6 @@
 # 🍽️ Sistema de Login para Bares e Restaurantes
 
-![Capa do Projeto](./BaresERestaurantes/SistemasBares&Restaurantess.png)
+![Capa do Projeto](SistemasBares&Restaurantess.png)
 
 ## 📌 Visão Geral
 
