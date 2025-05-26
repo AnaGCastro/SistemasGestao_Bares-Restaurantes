@@ -1,14 +1,23 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms'; // 👈 necessário para ngModel e ngForm
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { AppLoadingComponent } from '../../components/app-loading/app-loading.component';
 
 
 
 @Component({
   selector: 'app-login',
+  standalone: true,
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  imports: [
+    CommonModule,
+    FormsModule,
+    AppLoadingComponent
+  ]
 })
 export class LoginComponent {
   isLoading = false;
@@ -26,7 +35,7 @@ export class LoginComponent {
       username: form.value.username,
       password: form.value.password
     }).subscribe({
-      next: (response: any) => { // ou use AuthResponse se tiver
+      next: (response: any) => {
         localStorage.setItem('token', response.token);
         localStorage.setItem('user', JSON.stringify(response));
         console.log("Token:", response.token);
