@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
+
+
 
 @Component({
   selector: 'app-login',
@@ -8,22 +11,32 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  username = '';
-  password = '';
-  error = '';
+  isLoading = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private userService: UserService
+  ) {}
 
-  onSubmit(): void {
-    this.authService.login({ username: this.username, password: this.password }).subscribe({
-      next: (res) => {
-        localStorage.setItem('token', res.token);
-        this.router.navigate(['/']);
+  onSubmit(form: any): void {
+    this.isLoading = true;
+
+    this.authService.login({
+      username: form.value.username,
+      password: form.value.password
+    }).subscribe({
+      next: (response: any) => { // ou use AuthResponse se tiver
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('user', JSON.stringify(response));
+        console.log("Token:", response.token);
+        this.router.navigate(['/home']);
+        this.isLoading = false;
       },
-      error: () => {
-        this.error = 'Usuário ou senha inválidos.';
+      error: (err) => {
+        console.error('Erro no login', err);
+        this.isLoading = false;
       }
     });
   }
 }
-
