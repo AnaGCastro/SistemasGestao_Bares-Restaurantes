@@ -1,0 +1,15 @@
+<mat-toolbar color="primary" class="header-toolbar">
+  <span class="header-title">Meu Aplicativo</span>
+
+  <span class="spacer"></span>
+
+  <button mat-button id="timeButton" disabled class="time-button">
+    --:--:--
+  </button>
+
+  <span class="username">Olá, {{ username }}</span>
+
+  <button mat-icon-button (click)="logout()" aria-label="Sair">
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>
